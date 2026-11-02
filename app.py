@@ -120,7 +120,7 @@ def upload():
             quality["rejected_rows"] += len(duplicate_details)
             flash(f"Imported {inserted} new records; skipped {len(duplicate_details)} duplicate records.", "success")
             return render_template("upload.html", quality=quality, inserted=inserted)
-        except (ValueError, Error, Exception) as exc:
+        except Exception as exc:
             flash(f"Upload could not be processed: {exc}", "error")
             return redirect(url_for("upload"))
     return render_template("upload.html")
