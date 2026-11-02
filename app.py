@@ -142,7 +142,7 @@ def analysis():
         if not df.empty:
             create_charts(df, CHART_FOLDER)
         return render_template("analysis.html", summary=summary, location=location, has_data=not df.empty)
-    except (Error, Exception) as exc:
+    except Exception as exc:
         flash(f"Could not load analysis: {exc}", "error")
         return render_template("analysis.html", summary={}, location=location, has_data=False)
 
