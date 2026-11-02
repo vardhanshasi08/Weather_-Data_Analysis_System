@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}WeatherLab{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://unpkg.com/lucide@latest"></script></head><body>
+<div class="shell"><aside class="sidebar"><a class="brand" href="/"><span class="brand-icon">✦</span><span>Weather<span class="gradient-text">Lab</span><small>DATA INTELLIGENCE</small></span></a>
+<div class="nav-label">WORKSPACE</div><a class="nav-link" href="/"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+<a class="nav-link" href="/upload"><i data-lucide="cloud-upload"></i> Upload dataset</a><a class="nav-link" href="/analysis"><i data-lucide="chart-no-axes-combined"></i> Analysis & charts</a><a class="nav-link" href="/records"><i data-lucide="database"></i> Weather records</a>
+<div class="sidebar-bottom"><div class="status-dot"></div><span>Local analysis workspace</span><small>WeatherLab v1.0</small></div></aside>
+<main class="main"><header class="topbar"><div><span class="eyebrow">WEATHER DATA INTELLIGENCE</span><h2>{% block page_heading %}Overview{% endblock %}</h2></div><div class="top-right"><span class="live-pill"><span></span> SYSTEM READY</span><div class="avatar">WL</div></div></header>
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-wrap">{% for category,message in messages %}<div class="flash {{category}}">{{message}}</div>{% endfor %}</div>{% endif %}{% endwith %}
+{% block content %}{% endblock %}<footer>WeatherLab <span>·</span> Historical weather data analysis <span>·</span> Not a forecasting system</footer></main></div>
+<script>if(window.lucide) lucide.createIcons();</script></body></html>

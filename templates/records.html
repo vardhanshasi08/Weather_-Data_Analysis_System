@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Records · WeatherLab{% endblock %}
+{% block page_heading %}Weather records{% endblock %}
+{% block content %}
+<div class="page-intro">
+  <div><span class="eyebrow">MYSQL DATA STORE</span><h1>Recorded observations.</h1><p>Browse the latest 500 stored weather records.</p></div>
+  <form method="post" action="{{ url_for('delete_all_records') }}" onsubmit="return confirm('DELETE ALL weather records from the database? This cannot be undone.');">
+    <button class="btn danger" type="submit" {% if not rows %}disabled{% endif %}>Delete all records</button>
+  </form>
+</div>
+<div class="delete-note">Delete actions affect records stored in the MySQL database. They do not delete the original CSV file on your computer.</div>
+<section class="panel table-panel"><div class="table-scroll"><table>
+<thead><tr><th>ID</th><th>Date</th><th>Location</th><th>Temperature (°C)</th><th>Humidity (%)</th><th>Rainfall (mm)</th><th>Action</th></tr></thead>
+<tbody>
+{% for r in rows %}
+<tr><td>#{{r.record_id}}</td><td>{{r.observation_date}}</td><td>{{r.location}}</td><td>{{r.temperature}}</td><td>{{r.humidity}}</td><td>{{r.rainfall}}</td>
+<td><form method="post" action="{{ url_for('delete_record', record_id=r.record_id) }}" onsubmit="return confirm('Delete weather record #{{r.record_id}}?');"><button class="btn danger small-btn" type="submit">Delete</button></form></td></tr>
+{% else %}<tr><td colspan="7" class="empty-cell">No records found. Upload a CSV dataset to begin.</td></tr>{% endfor %}
+</tbody></table></div></section>
+{% endblock %}
